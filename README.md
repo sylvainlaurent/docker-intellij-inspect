@@ -22,7 +22,7 @@ docker run -it --rm -v `pwd`:/idea-project docker-intellij-inspect <any addition
 
 (notice the `` `pwd` `` command which allows to have the full path of the current directory as required by docker to map a volume to a directory on the host)
 
-The docker command returns when the inspection and result analysis is done and has the same result code as [bentolor/ideainspect](https://github.com/bentolor/idea-cli-inspector).
+The docker command returns when the inspection and result analysis is done and has the same result code as [bentolor/idea-cli-inspector](https://github.com/bentolor/idea-cli-inspector).
 
 # Future work
 - make it work with maven projects without committing the .iml and modules.xml files
