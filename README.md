@@ -2,6 +2,7 @@
 It includes
 - IntelliJ CE 2017.3
 - bentolor/ideainspect to launch the inspection and analyze the result
+- a predefined `jdk.table.xml` that declares a unique JDK named `1.8` (that can be referenced for analysis)
 
 # How to build the image?
 
