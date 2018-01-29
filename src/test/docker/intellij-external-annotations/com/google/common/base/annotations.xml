@@ -1,0 +1,8 @@
+<root>
+    <item name='com.google.common.base.MoreObjects T firstNonNull(T, T)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="value" val="&quot;!null,_-&gt;!null; null, !null -&gt; !null; null, null -&gt; fail&quot;"/>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

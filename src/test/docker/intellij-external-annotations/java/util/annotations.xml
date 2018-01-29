@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.HashMap V get(java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+</root>
