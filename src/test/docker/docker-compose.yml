@@ -5,3 +5,10 @@ services:
     image: intellij-inspect:latest
     volumes:
       - ./pure-idea-project:/idea-project
+  inspect-simple-maven-project:
+    build: ../../main/docker
+    image: intellij-inspect:latest
+    volumes:
+      - ./simple-maven-project:/idea-project
+      - ~/.m2/repository:/root/.m2/repository
+    command: --rootfile /idea-project/pom.xml --profile /idea-project/idea_inspection_profile.xml
