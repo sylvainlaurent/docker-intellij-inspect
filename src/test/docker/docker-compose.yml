@@ -1,0 +1,7 @@
+version: '3'
+services:
+  inspect-pure-idea-project:
+    build: ../../main/docker
+    image: intellij-inspect:latest
+    volumes:
+      - ./pure-idea-project:/idea-project
