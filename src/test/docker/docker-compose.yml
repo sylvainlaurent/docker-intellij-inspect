@@ -20,4 +20,8 @@ services:
       - ~/.m2/repository:/root/.m2/repository #re-use artifacts already downloaded on docker host
       - ./intellij-external-annotations:/idea-jdk-external-annotations:ro
       - ./intellij-external-annotations:/intellij-external-annotations:ro #name also specified in external-annotations-enabled-maven-project.iml
-    command: --rootfile /idea-project/pom.xml --profile CLI_inspection_profile.xml
+    command: 
+      - --rootfile
+      - /idea-project/pom.xml
+      - --profile
+      - CLI_inspection_profile.xml
