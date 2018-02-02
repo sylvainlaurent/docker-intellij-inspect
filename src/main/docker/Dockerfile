@@ -18,11 +18,16 @@ ENV PATH="/groovy/bin:${PATH}"
 ENV IDEA_HOME=/idea-IC
 
 COPY jdk.table.xml /root/.IdeaIC2017.3/config/options/jdk.table.xml
+COPY entrypoint.sh /
 #COPY ideainspect.groovy idea-cli-inspector/
 
-VOLUME /idea-project
-VOLUME /idea-external-annotations
+#let's pre-create empty dirs for mounts created by the entrypoint script
+RUN mkdir -p /intellij-inspect/idea-project-tmprw \
+    && mkdir -p /intellij-inspect/idea-project-ro \
+    && mkdir -p /intellij-inspect/idea-project-overlay-workdir
 
-WORKDIR /idea-project
+# declare a VOLUME so that its filesystem is not of type overlay so that we can create an overlay in the entrypoint
+VOLUME /intellij-inspect
+WORKDIR /intellij-inspect/idea-project-tmprw
 
-ENTRYPOINT ["/idea-cli-inspector/ideainspect.groovy", "-i", "/idea-IC"]
+ENTRYPOINT ["/entrypoint.sh"]

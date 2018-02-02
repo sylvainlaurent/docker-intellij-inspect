@@ -3,25 +3,50 @@ services:
   inspect-pure-idea-project:
     build: ../../main/docker
     image: intellij-inspect:latest
+    privileged: true
     volumes:
-      - ./pure-idea-project:/idea-project
+      - ./pure-idea-project:/intellij-inspect/idea-project-ro:ro
+
+  #same as above but we provide some external annotations
+  inspect-pure-idea-project-with-external-annotations:
+    build: ../../main/docker
+    image: intellij-inspect:latest
+    privileged: true
+    volumes:
+      - ./pure-idea-project:/intellij-inspect/idea-project-ro:ro
+      - ./intellij-external-annotations:/intellij-inspect/idea-jdk-external-annotations:ro
+      - ./intellij-external-annotations:/intellij-inspect/intellij-external-annotations:ro
+
   inspect-simple-maven-project:
     build: ../../main/docker
     image: intellij-inspect:latest
+    privileged: true
     volumes:
-      - ./simple-maven-project:/idea-project
+      - ./simple-maven-project:/intellij-inspect/idea-project-ro:ro
+      - ./simple-maven-project/target:/intellij-inspect/target #allows to retrieve the result of the inspection
       - ~/.m2/repository:/root/.m2/repository #re-use artifacts already downloaded on docker host
-    command: --rootfile /idea-project/pom.xml --profile /idea-project/idea_inspection_profile.xml
+    command:
+      - --rootfile
+      - /intellij-inspect/idea-project-tmprw/pom.xml
+      - --profile
+      - /intellij-inspect/idea-project-tmprw/idea_inspection_profile.xml
+      - --resultdir
+      - /intellij-inspect/target/inspection-results
+
   inspect-external-annotations-enabled-maven-project:
     build: ../../main/docker
     image: intellij-inspect:latest
+    privileged: true
     volumes:
-      - ./external-annotations-enabled-maven-project:/idea-project
+      - ./external-annotations-enabled-maven-project:/intellij-inspect/idea-project-ro:ro
       - ~/.m2/repository:/root/.m2/repository #re-use artifacts already downloaded on docker host
-      - ./intellij-external-annotations:/idea-jdk-external-annotations:ro
-      - ./intellij-external-annotations:/intellij-external-annotations:ro #name also specified in external-annotations-enabled-maven-project.iml
+      - ./intellij-external-annotations:/intellij-inspect/idea-jdk-external-annotations:ro
+      - ./intellij-external-annotations:/intellij-inspect/intellij-external-annotations:ro #name also specified in external-annotations-enabled-maven-project.iml
+      #- ./external-annotations-enabled-maven-project/target:/intellij-inspect/target
     command: 
       - --rootfile
-      - /idea-project/pom.xml
+      - /intellij-inspect/idea-project-tmprw/pom.xml
       - --profile
       - CLI_inspection_profile.xml
+      - --resultdir
+      - /intellij-inspect/target/inspection-results
