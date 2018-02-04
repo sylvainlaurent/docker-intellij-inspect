@@ -1,6 +1,7 @@
 package example;
 
 import com.google.common.base.MoreObjects;
+import org.apache.commons.collections4.ListUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,6 @@ public class Main {
         //inspection should detect that firstNonNull always fails according to (external) contract
         System.out.println(MoreObjects.firstNonNull((String) null, null));
 
-
     }
 
     @org.eclipse.jdt.annotation.NonNull
@@ -33,5 +33,9 @@ public class Main {
         } else {
             return "not null";
         }
+    }
+
+    private static void foo() {
+        System.out.println(ListUtils.defaultIfNull(null, null).size());
     }
 }

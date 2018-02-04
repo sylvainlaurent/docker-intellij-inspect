@@ -1,0 +1,11 @@
+<root>
+    <item name='org.apache.commons.collections4.ListUtils java.util.List&lt;E&gt; intersection(java.util.List&lt;? extends E&gt;, java.util.List&lt;? extends E&gt;)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='org.apache.commons.collections4.ListUtils java.util.List&lt;T&gt; defaultIfNull(java.util.List&lt;T&gt;, java.util.List&lt;T&gt;)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="value" val="&quot;!null,_-&gt;!null; null, !null -&gt; !null;null,null -&gt; null&quot;"/>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

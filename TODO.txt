@@ -1,29 +1,17 @@
-required files in docker container:
+files required to be present (visible) inside the docker container:
 
-- *.iml with external annotations
-- .idea/libraries -> no need, if using --rootfile /idea-project/pom.xml with ideainspect
-- inspection profile xml file in .idea/inspectionProfiles/
+- .idea/libraries/*.xml -> must contain the <ANNOTATIONS> element that reference the external annotations dir. Example:
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$/../intellij-external-annotations" />
+    </ANNOTATIONS>
+
+- inspection profile xml file in .idea/inspectionProfiles/ (or anywhere else with newer groovy script)
 - ~/.m2/repository with all deps : not really required but speeds up project opening since it avoids to download all deps again
+- external annotations
+
+not required (at least for maven projects)
+- *.iml
 
 Todo:
-- either commit iml files and make sure that the external dir is available at the same relative location inside the container
-- or create a maven plugin that adds the <annotation-paths> tag in the iml files
-- or add a minimal iml file like this:
+- create a maven plugin that adds the <ANNOTATIONS> in the the libraries/*.xml files + optionally the <annotations-path> to the ".iml files
 
-<?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <annotation-paths>
-      <root url="file://$MODULE_DIR$/../../intellij-external-annotations" />
-    </annotation-paths>
-    <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/target" />
-    </content>
-  </component>
-</module>
