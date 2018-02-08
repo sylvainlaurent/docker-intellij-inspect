@@ -2,19 +2,19 @@
 
 set -e
 
-# assuming the container is launched with /home/ijinspector/idea-project-ro bound to the host directory that contains the IDEA project
-# we create an overlay above /home/ijinspector/idea-project-ro so that we can modify some files in the
+# assuming the container is launched with /home/ijinspector/idea-project bound to the host directory that contains the IDEA project
+# we create an overlay above /home/ijinspector/idea-project so that we can modify some files in the
 # container without affecting the files on the host
-echo "Trying to create an overlay /home/ijinspector/idea-project-tmprw above /home/ijinspector/idea-project-ro"
+echo "Trying to create an overlay /home/ijinspector/idea-project-tmprw above /home/ijinspector/idea-project"
 MOUNT_FAILED=0
-mount -t overlay overlay -o lowerdir=/home/ijinspector/idea-project-ro,upperdir=/home/ijinspector/idea-project-tmprw,workdir=/home/ijinspector/idea-project-overlay-workdir /home/ijinspector/idea-project-tmprw \
+mount -t overlay overlay -o lowerdir=/home/ijinspector/idea-project,upperdir=/home/ijinspector/idea-project-tmprw,workdir=/home/ijinspector/idea-project-overlay-workdir /home/ijinspector/idea-project-tmprw \
    || MOUNT_FAILED=1
 
 if [ $MOUNT_FAILED = 1 ]; then
     echo "Mount failed, the container is probably not run as --privileged, reverting to symbolic link"
     cd /home/ijinspector \
     && rm -rf /home/ijinspector/idea-project-tmprw \
-    && ln -s /home/ijinspector/idea-project-ro /home/ijinspector/idea-project-tmprw
+    && ln -s /home/ijinspector/idea-project /home/ijinspector/idea-project-tmprw
 fi
 
 #set working dir and change user to drop privileges

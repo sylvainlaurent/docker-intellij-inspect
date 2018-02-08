@@ -19,7 +19,9 @@ WORKDIR /home/ijinspector
 
 USER ijinspector:ijinspector
 
-RUN curl https://download-cf.jetbrains.com/idea/ideaIC-2017.3.2-no-jdk.tar.gz > /tmp/ideaIC-jdk.tar.gz \
+ARG IDEA_VERSION=ideaIC-2017.3.4
+
+RUN curl https://download-cf.jetbrains.com/idea/${IDEA_VERSION}-no-jdk.tar.gz > /tmp/ideaIC-jdk.tar.gz \
   && mkdir idea-IC \
   && tar -x -C idea-IC --strip-components=1 -z -f /tmp/ideaIC-jdk.tar.gz \
   && rm /tmp/ideaIC-jdk.tar.gz
@@ -40,7 +42,7 @@ COPY --chown=ijinspector:ijinspector jdk.table.xml /home/ijinspector/.IdeaIC2017
 
 #let's pre-create empty dirs for mounts created by the entrypoint script
 RUN mkdir -p /home/ijinspector/idea-project-tmprw \
-    && mkdir -p /home/ijinspector/idea-project-ro \
+    && mkdir -p /home/ijinspector/idea-project \
     && mkdir -p /home/ijinspector/idea-project-overlay-workdir
 
 # declare a VOLUME so that its filesystem is not of type overlay so that we can create an overlay in the entrypoint

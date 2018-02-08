@@ -5,7 +5,7 @@ services:
     image: intellij-inspect:latest
     privileged: true
     volumes:
-      - ./pure-idea-project:/home/ijinspector/idea-project-ro:ro
+      - ./pure-idea-project:/home/ijinspector/idea-project:ro
 
   #same as above but we provide some external annotations
   inspect-pure-idea-project-with-external-annotations:
@@ -13,7 +13,7 @@ services:
     image: intellij-inspect:latest
     privileged: true
     volumes:
-      - ./pure-idea-project:/home/ijinspector/idea-project-ro:ro
+      - ./pure-idea-project:/home/ijinspector/idea-project:ro
       - ./intellij-external-annotations:/home/ijinspector/idea-jdk-external-annotations:ro
       - ./intellij-external-annotations:/home/ijinspector/intellij-external-annotations:ro
 
@@ -22,7 +22,7 @@ services:
     image: intellij-inspect:latest
     privileged: true
     volumes:
-      - ./simple-maven-project:/home/ijinspector/idea-project-ro:ro
+      - ./simple-maven-project:/home/ijinspector/idea-project:ro
       - ./simple-maven-project/target:/home/ijinspector/target #allows to retrieve the result of the inspection
       - ~/.m2/repository:/home/ijinspector/.m2/repository #re-use artifacts already downloaded on docker host
     command:
@@ -38,7 +38,7 @@ services:
     image: intellij-inspect:latest
     privileged: false
     volumes:
-      - ./external-annotations-enabled-maven-project:/home/ijinspector/idea-project-ro:ro
+      - ./external-annotations-enabled-maven-project:/home/ijinspector/idea-project:ro
       - ~/.m2/repository:/home/ijinspector/.m2/repository #re-use artifacts already downloaded on docker host
       - ./intellij-external-annotations:/home/ijinspector/idea-jdk-external-annotations:ro
       - ./intellij-external-annotations:/home/ijinspector/intellij-external-annotations:ro #name also specified in external-annotations-enabled-maven-project.iml

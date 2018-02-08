@@ -1,0 +1,14 @@
+version: '3'
+services:
+  inspect:
+    image: intellij-inspect:latest
+    volumes:
+      - .:/home/ijinspector/idea-project:ro
+      - ~/.m2/repository:/home/ijinspector/.m2/repository
+      - ../intellij-external-annotations:/home/ijinspector/idea-jdk-external-annotations:ro
+      - ../intellij-external-annotations:/home/ijinspector/intellij-external-annotations:ro
+    command: 
+      - --rootfile
+      - /home/ijinspector/idea-project/pom.xml
+      - --profile
+      - CLI_inspection_profile.xml

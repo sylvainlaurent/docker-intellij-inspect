@@ -10,6 +10,7 @@ public class Main {
 
         Map<String, String> map = new HashMap<>();
         map.put("key1", "value2");
+        //if external annotations are properly configured, IJ will complain about next statement
         System.out.println(map.get("notExistingKey").toLowerCase());
     }
 }
