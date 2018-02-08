@@ -15,11 +15,11 @@ docker build --tag docker-intellij-inspect .
 - (assuming a macOS or Linux machine, it should also work on Windows with some adaptations to the commands)
 - open a shell at the root of the IntelliJ project you want to analyze
 - either
--- prepare a `.ideainspect` file
--- or think about the arguments to pass to ideainspect. See https://github.com/bentolor/idea-cli-inspector for documentation
+  - prepare a `.ideainspect` file
+  - or think about the arguments to pass to ideainspect. See https://github.com/bentolor/idea-cli-inspector for documentation
 - launch a one-off docker container, mapping the following volumes:
--- the idea project to be inspected on the host to the `/home/ijinspector/idea-project` directory in the container
--- the host maven repository to the `/home/ijinspector/.m2/repository` directory in the container. Note that the maven dependencies must have previously been downloaded on the host. If some dependency is not available during the inspection, you'll see errors like `Please configure library 'Maven:....`
+  - the idea project to be inspected on the host to the `/home/ijinspector/idea-project` directory in the container
+  - the host maven repository to the `/home/ijinspector/.m2/repository` directory in the container. Note that the maven dependencies must have previously been downloaded on the host. If some dependency is not available during the inspection, you'll see errors like `Please configure library 'Maven:....`
 
 Example:
 
