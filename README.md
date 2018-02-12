@@ -1,4 +1,6 @@
 # docker image to help running IntelliJ inspections.
+[![docker hub](https://img.shields.io/badge/docker-hub-brightgreen.svg)](https://hub.docker.com/r/slaurent/intellij-inspect/)
+
 It includes
 - IntelliJ CE 2017.3
 - [bentolor/idea-cli-inspector](https://github.com/bentolor/idea-cli-inspector) to launch the inspection and analyze the result
