@@ -10,7 +10,7 @@ It includes
 
 ```
 cd src/main/docker
-docker build --tag docker-intellij-inspect .
+docker build --tag intellij-inspect:latest .
 ```
 
 # How to run?

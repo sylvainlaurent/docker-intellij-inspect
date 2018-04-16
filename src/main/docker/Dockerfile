@@ -19,7 +19,7 @@ WORKDIR /home/ijinspector
 
 USER ijinspector:ijinspector
 
-ARG IDEA_VERSION=ideaIC-2017.3.4
+ARG IDEA_VERSION=ideaIC-2018.1.1
 
 RUN curl https://download-cf.jetbrains.com/idea/${IDEA_VERSION}-no-jdk.tar.gz > /tmp/ideaIC-jdk.tar.gz \
   && mkdir idea-IC \
@@ -38,7 +38,7 @@ RUN curl -L https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.13.zip 
 ENV PATH="/home/ijinspector/groovy/bin:${PATH}"
 ENV IDEA_HOME="/home/ijinspector/idea-IC"
 
-COPY --chown=ijinspector:ijinspector jdk.table.xml /home/ijinspector/.IdeaIC2017.3/config/options/jdk.table.xml
+COPY --chown=ijinspector:ijinspector jdk.table.xml /home/ijinspector/.IdeaIC2018.1/config/options/jdk.table.xml
 
 #let's pre-create empty dirs for mounts created by the entrypoint script
 RUN mkdir -p /home/ijinspector/idea-project-tmprw \
